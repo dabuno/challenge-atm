@@ -28,13 +28,13 @@ public class ATMController {
 
 
     @PostMapping("/withdraw")
-    public String withdraw(@RequestParam(name = "amount") BigDecimal amount) {
+    public String withdraw(@RequestParam(name = "amount") BigDecimal amount) throws AmountException {
         accountService.subtractAmount(account, amount);
         return "redirect:/withdraw";
     }
 
     @PostMapping("/deposit")
-    public String deposit(@RequestParam(name = "amount") BigDecimal amount) {
+    public String deposit(@RequestParam(name = "amount") BigDecimal amount) throws AmountException {
         accountService.addAmount(account, amount);
         return "redirect:/deposit";
     }
@@ -62,5 +62,16 @@ public class ATMController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/";
+    }
+
+    @ExceptionHandler(AmountException.class)
+    public ModelAndView handleEmployeeNotFoundException(HttpServletRequest request, Exception ex){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("account", account);
+        modelAndView.addObject("exception", ex);
+        modelAndView.addObject("url", request.getRequestURL());
+
+        modelAndView.setViewName("welcome");
+        return modelAndView;
     }
 }

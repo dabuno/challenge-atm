@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import ro.challenge.atm.AmountException;
 import ro.challenge.atm.model.Account;
 import ro.challenge.atm.repository.AccountRepository;
 
@@ -31,42 +32,42 @@ class AccountServiceTest {
     }
 
     @Test
-    void addOneAmount() {
+    void addOneAmount() throws AmountException {
         when(accountRepository.save(account)).thenReturn(account);
         accountService.addAmount(account, BigDecimal.ONE);
         assertEquals(BigDecimal.ONE, account.getBalance());
     }
 
     @Test
-    void addZeroAmount() {
+    void addZeroAmount() throws AmountException {
         when(accountRepository.save(account)).thenReturn(account);
         accountService.addAmount(account, BigDecimal.ZERO);
         assertEquals(BigDecimal.ZERO, account.getBalance());
     }
 
     @Test
-    void addNullAmount() {
+    void addNullAmount() throws AmountException {
         when(accountRepository.save(account)).thenReturn(account);
         accountService.addAmount(account, null);
         assertEquals(BigDecimal.ZERO, account.getBalance());
     }
 
     @Test
-    void addNegativeAmount() {
+    void addNegativeAmount() throws AmountException {
         when(accountRepository.save(account)).thenReturn(account);
         accountService.addAmount(account, BigDecimal.valueOf(-1000L));
         assertEquals(BigDecimal.ZERO, account.getBalance());
     }
 
     @Test
-    void subtractOneAmount() {
+    void subtractOneAmount() throws Exception {
         when(accountRepository.save(account)).thenReturn(account);
         accountService.subtractAmount(account, BigDecimal.ONE);
         assertEquals(BigDecimal.ZERO, account.getBalance());
     }
 
     @Test
-    void subtractNegativeAmount() {
+    void subtractNegativeAmount() throws Exception {
         when(accountRepository.save(account)).thenReturn(account);
         accountService.subtractAmount(account, BigDecimal.valueOf(-1000L));
         assertEquals(BigDecimal.ZERO, account.getBalance());
