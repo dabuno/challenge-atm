@@ -10,3 +10,5 @@ admin/password
 
 # run the app
 mvn spring-boot:run
+
+after start we can access the app on http://localhost:8080/
