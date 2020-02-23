@@ -1,5 +1,6 @@
 package ro.challenge.atm.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,30 +47,34 @@ class AccountServiceTest {
     }
 
     @Test
-    void addNullAmount() throws AmountException {
+    void addNullAmount() {
         when(accountRepository.save(account)).thenReturn(account);
-        accountService.addAmount(account, null);
-        assertEquals(BigDecimal.ZERO, account.getBalance());
+        Assertions.assertThrows(AmountException.class, () -> {
+            accountService.addAmount(account, null);
+        });
     }
 
     @Test
-    void addNegativeAmount() throws AmountException {
+    void addNegativeAmount() {
         when(accountRepository.save(account)).thenReturn(account);
-        accountService.addAmount(account, BigDecimal.valueOf(-1000L));
-        assertEquals(BigDecimal.ZERO, account.getBalance());
+        Assertions.assertThrows(AmountException.class, () -> {
+            accountService.addAmount(account, BigDecimal.valueOf(-1000L));
+        });
     }
 
     @Test
-    void subtractOneAmount() throws Exception {
+    void subtractOneAmount() {
         when(accountRepository.save(account)).thenReturn(account);
-        accountService.subtractAmount(account, BigDecimal.ONE);
-        assertEquals(BigDecimal.ZERO, account.getBalance());
+        Assertions.assertThrows(AmountException.class, () -> {
+            accountService.subtractAmount(account, BigDecimal.ONE);
+        });
     }
 
     @Test
-    void subtractNegativeAmount() throws Exception {
+    void subtractNegativeAmount() {
         when(accountRepository.save(account)).thenReturn(account);
-        accountService.subtractAmount(account, BigDecimal.valueOf(-1000L));
-        assertEquals(BigDecimal.ZERO, account.getBalance());
+        Assertions.assertThrows(AmountException.class, () -> {
+            accountService.subtractAmount(account, BigDecimal.valueOf(-1000L));
+        });
     }
 }
