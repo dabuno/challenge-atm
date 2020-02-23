@@ -1,0 +1,3 @@
+<div th:fragment="balance">
+    Current balance: <span th:text=${account.balance} th:unless="${account == null}"></span>
+</div>

@@ -1,0 +1,14 @@
+<div th:fragment="withdraw">
+    Current balance: <span th:text=${account.balance} th:unless="${account == null}"></span>
+    <div class="col-5">
+        <form method="post" th:action="@{/withdraw}">
+            <div class="form-group">
+                <label for="Amount">Withdraw</label>
+                <input type="number" class="form-control" id="Amount" name="amount" placeholder="Withdraw amount"
+                       step="0.01">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Withdraw</button>
+        </form>
+    </div>
+</div>

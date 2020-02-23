@@ -1,0 +1,1 @@
+insert into ACCOUNT(id, first_name, last_name, balance) values ( 1, 'User', 'Name', 123.22);

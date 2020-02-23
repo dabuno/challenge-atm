@@ -1,0 +1,14 @@
+<div th:fragment="deposit">
+    Current balance: <span th:text=${account.balance} th:unless="${account == null}"></span>
+    <div class="col-5">
+        <form method="post" th:action="@{/deposit}">
+            <div class="form-group">
+                <label for="Amount">Deposit</label>
+                <input type="number" class="form-control" id="Amount" name="amount" placeholder="Deposit amount"
+                       step="0.01">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Deposit</button>
+        </form>
+    </div>
+</div>

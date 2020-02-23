@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:include="head :: head">
+    <title id="pageTitle">Challenge ATM</title>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="card text-center">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="list-group">
+                        <a th:href="@{/balance}" class="list-group-item list-group-item-action"
+                           th:classappend="${#httpServletRequest.requestURI.contains('balance')} OR ${#httpServletRequest.requestURI.equals('/')} ? 'active' : ''">
+                            Balance
+                        </a>
+
+                        <a th:href="@{/withdraw}" class="list-group-item list-group-item-action"
+                           th:classappend="${#httpServletRequest.requestURI.contains('withdraw')} ? 'active' : ''">
+                            Withdraw
+                        </a>
+                        <a th:href="@{/deposit}" class="list-group-item list-group-item-action"
+                           th:classappend="${#httpServletRequest.requestURI.contains('deposit')} ? 'active' : ''">
+                            Deposit
+                        </a>
+
+                        <a th:href="@{/logout}" class="list-group-item list-group-item-action">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-10">
+
+                    <div class="card-header">
+                        <h6 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h6>
+                    </div>
+                    <div class="card-body">
+                        <th:block th:if="${#httpServletRequest.requestURI.contains('balance')} OR ${#httpServletRequest.requestURI.equals('/')}">
+                            <div th:replace="balance :: balance"></div>
+                        </th:block>
+
+                        <th:block th:if="${#httpServletRequest.requestURI.contains('withdraw')}">
+                            <div th:replace="withdraw :: withdraw"></div>
+                        </th:block>
+
+                        <th:block th:if="${#httpServletRequest.requestURI.contains('deposit')}">
+                            <div th:replace="deposit :: deposit"></div>
+                        </th:block>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <div th:replace="footer :: footer"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
