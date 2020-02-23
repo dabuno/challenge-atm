@@ -6,7 +6,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ro.challenge.atm.model.Account;
@@ -29,13 +28,13 @@ public class ATMController {
 
 
     @PostMapping("/withdraw")
-    public String withdraw(@RequestParam(name = "amount", required = true) BigDecimal amount) {
+    public String withdraw(@RequestParam(name = "amount") BigDecimal amount) {
         accountService.subtractAmount(account, amount);
         return "redirect:/withdraw";
     }
 
     @PostMapping("/deposit")
-    public String deposit(@RequestParam(name = "amount", required = true) BigDecimal amount) {
+    public String deposit(@RequestParam(name = "amount") BigDecimal amount) {
         accountService.addAmount(account, amount);
         return "redirect:/deposit";
     }
