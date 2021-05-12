@@ -16,7 +16,7 @@
 
     <properties>
 
-        <mvc.version>5.2.1.RELEASE</mvc.version>
+        <mvc.version>5.2.10.RELEASE</mvc.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
